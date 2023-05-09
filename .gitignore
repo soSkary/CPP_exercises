@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+2.1_2.2_fuelConsumption/fuelConsumption
+*.vscode
