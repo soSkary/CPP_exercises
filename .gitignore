@@ -31,9 +31,11 @@
 *.out
 *.app
 
+# Project specific executables
 2.1_2.2_fuelConsumption/fuelConsumption
 2.3_gymMembership/gymMembership
 2.4_BMI/BMI
 2.5_personNumber/personNumber
 2.6_multiMillionaire/multiMillionaire
 2.7_fibonacci/fibonacci
+3.3_intList/intList
