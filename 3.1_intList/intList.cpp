@@ -52,7 +52,8 @@ std::vector<int> readListFromFile(const std::string& filePath)
     std::vector<int> intList{};
     std::string readLine{};
     
-    
+    std::cout << "The values read from " << filePath << ":\n";
+
     while (std::getline(csvFile, readLine))
     {
         std::stringstream lineStream{ readLine };
@@ -60,7 +61,9 @@ std::vector<int> readListFromFile(const std::string& filePath)
         while (std::getline(lineStream, stringValue, ';'))
         {
             intList.push_back(std::stoi(stringValue));
+            std::cout << stringValue << "; ";
         }
+        std::cout << '\n';
         readLine = "";
     }
     if (csvFile.is_open())
@@ -76,7 +79,7 @@ void printMode(std::vector<int>& intList)
     
     int maxCount{ 0 };
     int currentCount{ 0 };
-    std::vector<int> maxNumber{ intList.at(0) };        //the number(s) to output as the mode needs to be an array, as there could be several modes
+    std::vector<int> maxNumber{ intList.at(0) };        //the number(s) to output needs to be an array, as there could be several modes
     int currentNumber{ intList.at(0) };
     bool severalModes { false };                        //this is maybe a bit superfluous, only for correct suffix and preposition (mode is/modes are)
     std::vector<int> numbersTested( intList.size() );   //this is to save numbers already tested, to minimize extra looping
@@ -129,7 +132,11 @@ void printMode(std::vector<int>& intList)
 }
 void printListStats (std::vector<int>& intList)
 {
-    if (!intList.empty())
+    if (intList.size() == 1)
+    {
+        std::cout << "The provided list contains only one value: " << intList.at(0) << "\n\n";
+    }
+    else if (!intList.empty())
     {
         int sum{ std::accumulate(intList.begin(),intList.end(), 0) } ;
         std::cout << "The sum is:\t\t" << sum << '\n';
