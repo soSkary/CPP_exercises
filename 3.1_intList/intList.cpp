@@ -74,14 +74,13 @@ std::vector<int> readListFromFile(const std::string& filePath)
     return intList;
 }
 
-void printMode(std::vector<int>& intList)
+std::vector<int> getMode(std::vector<int>& intList)
 {
     
     int maxCount{ 0 };
     int currentCount{ 0 };
     std::vector<int> maxNumber{ intList.at(0) };        //the number(s) to output needs to be an array, as there could be several modes
     int currentNumber{ intList.at(0) };
-    bool severalModes { false };                        //this is maybe a bit superfluous, only for correct suffix and preposition (mode is/modes are)
     std::vector<int> numbersTested( intList.size() );   //this is to save numbers already tested, to minimize extra looping
     for (int i {0}; i < intList.size(); ++i)
     {
@@ -98,6 +97,8 @@ void printMode(std::vector<int>& intList)
                     ++currentCount;
                 }
             }
+
+            //Push back the current number,so it doesn't get tested again
             numbersTested.push_back(currentNumber);
             //If there are more of the currentNumber than of the previous maxNumber,
             //empty vector and current becomes max
@@ -106,30 +107,38 @@ void printMode(std::vector<int>& intList)
                 maxCount = currentCount;
                 maxNumber.clear();
                 maxNumber.push_back( currentNumber );
-                severalModes = false;
             }
             //If there are as many of the current, as there's of the previous
             //add the current to the vector
             else if (currentCount == maxCount)
             {
                 maxNumber.push_back(currentNumber);
-                severalModes = true;
             }
         }
     }
-    if (!severalModes)
-    std::cout << "The mode is:\t\t" << maxNumber.at(0) << '\n';
-    else
-    {
-        std::sort(maxNumber.begin(), maxNumber.end());
-        std::cout << "The modes are:\t\t";
-        for (auto element: maxNumber)
-        {
-            std::cout << element << ' ';
-        }
-        std::cout << '\n';
-    }
+    std::sort(maxNumber.begin(), maxNumber.end());
+    return maxNumber;
 }
+
+int getSum( std::vector<int>& intList )
+{
+    return { std::accumulate(intList.begin(),intList.end(), 0) };
+}
+double getAverage( double sum, double size )
+{
+    return { sum / size };
+}
+int getMin( std::vector<int>& intList )
+{ 
+   auto smallest{ std::min_element(intList.begin(), intList.end()) };
+   return { *smallest };
+}
+int getMax( std::vector<int>& intList )
+{
+     auto largest{ std::max_element( intList.begin(), intList.end()) };
+     return { *largest };
+}
+
 void printListStats (std::vector<int>& intList)
 {
     if (intList.size() == 1)
@@ -138,22 +147,28 @@ void printListStats (std::vector<int>& intList)
     }
     else if (!intList.empty())
     {
-        int sum{ std::accumulate(intList.begin(),intList.end(), 0) } ;
+        int sum{ getSum( intList ) } ;
         std::cout << "The sum is:\t\t" << sum << '\n';
 
-        double average{ static_cast<double>(sum) / static_cast<double>(intList.size()) };
-        std::cout << "The average is:\t\t" << std::fixed << std::setprecision(1) << average << '\n';
+        std::cout << "The average is:\t\t" << std::fixed << std::setprecision(1) << getAverage(static_cast<double>(sum), static_cast<double>(intList.size())) << '\n';
 
-        //as the mode gets a bit complicated, it warranted it's own function
-        printMode( intList );
-    
-        auto largest{ std::max_element( intList.begin(), intList.end()) };
-        std::cout << "The largest value:\t" << *largest << '\n';
+        std::vector<int> mode{ getMode( intList ) };
+        if (mode.size() == 1)
+            std::cout << "The mode is:\t\t" << mode.at(0) << '\n';
+        else
+        {
+            std::cout << "The modes are:\t\t";
+            for (auto value: mode)
+                std::cout << value << ' ';
+            std::cout << '\n';
+        }
+        int smallest{ getMin( intList ) };
+        std::cout << "The largest value:\t" << smallest << '\n';
 
-        auto smallest{ std::min_element(intList.begin(), intList.end()) };
-        std::cout << "The smallest value:\t" << *smallest << '\n';
+        int largest{ getMax ( intList ) };
+        std::cout << "The smallest value:\t" << largest << '\n';
 
-        std::cout <<  "The difference between\nmax and min: \t\t" << *largest - *smallest << "\n\n";
+        std::cout <<  "The difference between\nmax and min: \t\t" << largest - smallest << "\n\n";
     }
     else
         std::cerr << "Empty list, can't print stats!\n\n";
