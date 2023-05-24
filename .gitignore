@@ -32,6 +32,9 @@
 *.app
 
 # Project specific executables
+1.1_1.2_plusMinus/plusMinus
+1.3_sizeOfTypes/sizeOfTypes
+1.4_circleDimensions/circleDimensions
 2.1_2.2_fuelConsumption/fuelConsumption
 2.3_gymMembership/gymMembership
 2.4_BMI/BMI
