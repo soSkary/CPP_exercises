@@ -18,21 +18,30 @@ void print_minutes_seconds(const std::time_t time)
     std::cout << time / 60 << " minutes " << time % 60 << " seconds\n";
 }
 
+void print_local_time(std::time_t system_time)
+{
+    std::tm* local_time{localtime(&system_time)};
+    std::cout << "Time and date: " << std::asctime(local_time);
+}
+
 int main()
 {
-    using namespace std::chrono_literals;
+    
     
     const auto start{ get_current_time() };
-    std::this_thread::sleep_for(5000ms);
+    print_local_time(start);
+    
+    
+    std::this_thread::sleep_for(std::chrono::seconds(5));
+    
     const auto end{ get_current_time() };
+    print_local_time(end);
 
     const auto elapsed{ calculate_elapsed_time(start, end) };
-
-    std::cout << "Start: " << start << '\n';
-    std::cout << "End: " << end << '\n';
-    std::cout << "Elapsed: ";
+    std::cout << "Elapsed time: ";
     print_minutes_seconds(elapsed);
 
+    return 0;
 }
 
 
