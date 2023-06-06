@@ -31,6 +31,9 @@
 *.out
 *.app
 
+# .vscode folders
+**/.vscode/*
+
 # Project specific executables
 1.1_1.2_plusMinus/plusMinus
 1.3_sizeOfTypes/sizeOfTypes
