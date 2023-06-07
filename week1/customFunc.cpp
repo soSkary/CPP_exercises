@@ -70,7 +70,7 @@ std::string get_name()
     while (true)
     {
         std::cout << "Please insert name: ";
-        std::cin >> name;
+        std::getline(std::cin >> std::ws, name);
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
         if (!std::cin)
