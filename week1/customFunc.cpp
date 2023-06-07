@@ -5,7 +5,7 @@
 #include <iostream>
 #include <limits>               //for numeric_limits
 
-std::string reverseString(const std::string& str)
+std::string reverse_string(const std::string& str)
 {
     if (str.size() == 1 || str.empty())
     {
@@ -13,16 +13,16 @@ std::string reverseString(const std::string& str)
     }
     else
     {
-        std::string returnStr{};
+        std::string return_string{};
         for (auto revIt{ str.rbegin()}; revIt != str.rend(); ++revIt)
         {
-            returnStr.push_back( *revIt );
+            return_string.push_back( *revIt );
         }
-        return returnStr;
+        return return_string;
     }
 }
 
-bool passwordVerifier(const std::string& password)
+bool password_verifier(const std::string& password)
 {
     //Various if statements, and if all passed, password is valid and return true, else return false
 
@@ -64,7 +64,7 @@ bool passwordVerifier(const std::string& password)
     }
 }
 
-std::string getName()
+std::string get_name()
 {
     std::string name{};
     while (true)
@@ -83,7 +83,7 @@ std::string getName()
     }
     return name;
 }
-int getAge()
+int get_age()
 {
     int age{};
     while (true)
@@ -102,7 +102,7 @@ int getAge()
     }
     return age;
 }
-int getGrade()
+int get_grade()
 {
     int grade{};
     while (true)
@@ -123,7 +123,7 @@ int getGrade()
 }
 
 //Create a group of students according to user input
-std::vector<Student> createStudentGroup()
+std::vector<Student> create_student_group()
 {
     std::size_t groupSize{};
     
@@ -140,8 +140,8 @@ std::vector<Student> createStudentGroup()
             continue;
         }
         
-        std::vector<Student> studentGroup( groupSize );
-        return studentGroup;
+        std::vector<Student> student_group( groupSize );
+        return student_group;
     }
 }
 //Overload << operator to print students
@@ -151,88 +151,88 @@ std::ostream& operator<<(std::ostream& ostream, Student& student)
     return ostream;
 }
 //Fill group with students input from user
-void createGroupMembers(std::vector<Student>& studentGroup)
+void create_group_members(std::vector<Student>& student_group)
 {
-    if (studentGroup.size() == 0)
+    if (student_group.size() == 0)
     {
         std::cout << "The group is empty!!!\n";
         return;
     }
-        for (int i{ 0 }; i < studentGroup.size(); ++i)
+        for (int i{ 0 }; i < student_group.size(); ++i)
     {
         
         std::cout << "Insert information for student number: " << i+1 << '\n';
-        studentGroup.at(i) = { getName(), getAge(), getGrade() };
+        student_group.at(i) = { get_name(), get_age(), get_grade() };
         std::cout << '\n';
     }
     
 }
 
-double getGroupAverageGrade(std::vector<Student>& studentGroup)
+double get_group_average_grade(std::vector<Student>& student_group)
 {
-    if (studentGroup.size() == 0)
+    if (student_group.size() == 0)
     {
         std::cout << "The group is empty!!!\n";
         return {};
     }
-    else if (studentGroup.size() == 1)
+    else if (student_group.size() == 1)
     {
-        return static_cast<double>( studentGroup.at(0).grade );
+        return static_cast<double>( student_group.at(0).grade );
     }
     else
     {
         
-        double sumOfGrades{ 0 };
-        for (const auto& student : studentGroup)
+        double sum_of_grades{ 0 };
+        for (const auto& student : student_group)
         {
-            sumOfGrades += student.grade;
+            sum_of_grades += student.grade;
         }
-        return sumOfGrades / static_cast<double>(studentGroup.size());
+        return sum_of_grades / static_cast<double>(student_group.size());
     }
 }
 //Get list of students with best grade
-std::vector<std::string> getBestStudents(std::vector<Student>& studentGroup)
+std::vector<std::string> get_best_students(std::vector<Student>& student_group)
 {
-    if (studentGroup.size() == 0)
+    if (student_group.size() == 0)
     {
         std::cout << "The group is empty!!!\n";
         return {};
     }
-    else if (studentGroup.size() == 1)
+    else if (student_group.size() == 1)
     {
-        return { studentGroup.at(0).name };
+        return { student_group.at(0).name };
     }
     else
     {
         
-        std::vector<std::string> bestStudents{};
-        int maxGrade{ studentGroup.at(0).grade };
+        std::vector<std::string> best_students{};
+        int maxGrade{ student_group.at(0).grade };
 
-        for (const auto& student : studentGroup)
+        for (const auto& student : student_group)
         {
             if (student.grade > maxGrade)
             {
-                bestStudents.clear();
-                bestStudents.push_back(student.name);
+                best_students.clear();
+                best_students.push_back(student.name);
                 maxGrade = student.grade;
             }
             else if (student.grade == maxGrade)
             {
-                bestStudents.push_back(student.name);
+                best_students.push_back(student.name);
             }
             else
             {}
         }
-        return bestStudents;
+        return best_students;
     }    
 }
 //Function for printing best students
-void printBestStudents(std::vector<Student>& studentGroup)
+void print_best_students(std::vector<Student>& student_group)
 {
-    std::vector<std::string> bestStudents{};
-    bestStudents = getBestStudents(studentGroup);
+    std::vector<std::string> best_students{};
+    best_students = get_best_students(student_group);
 
-    for (const auto& student : bestStudents)
+    for (const auto& student : best_students)
     {
         std::cout << student << ", ";
     }

@@ -14,17 +14,17 @@ struct Student
     friend std::ostream& operator<<(std::ostream& ostream, Student& student);
 };
 
-std::string reverseString(const std::string& str);
+std::string reverse_string(const std::string& str);
 
-bool passwordVerifier(const std::string& password);
+bool password_verifier(const std::string& password);
 
-std::vector<Student> createStudentGroup();
-std::string getName();
-int getAge();
-int getGrade();
-void createGroupMembers(std::vector<Student>& studentGroup);
-double getGroupAverageGrade(std::vector<Student>& studentGroup);
-std::vector<std::string> getBestStudents(std::vector<Student>& studentGroup);
-void printBestStudents(std::vector<Student>& studentGroup);
+std::vector<Student> create_student_group();
+std::string get_name();
+int get_age();
+int get_grade();
+void create_group_members(std::vector<Student>& student_group);
+double get_group_average_grade(std::vector<Student>& student_group);
+std::vector<std::string> get_best_students(std::vector<Student>& student_group);
+void print_best_students(std::vector<Student>& student_group);
 
 #endif
