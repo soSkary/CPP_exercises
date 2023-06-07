@@ -10,7 +10,7 @@ public:
     {
         return m_value;
     }
-    void set_value(int value)
+    void set_value(const int value)
     {
         m_value = value;
     }
