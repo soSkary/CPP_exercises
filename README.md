@@ -1,2 +1,2 @@
-This repository is for the prestudy assignments for the Brights Learning C++ program.
+This repository is for the course assignments at Brights Learning C++ program.
 
