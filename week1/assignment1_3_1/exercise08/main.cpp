@@ -13,7 +13,7 @@ void create_dyn_int_array()
 {
     //create new dynamically allocated int array
     int length{ 5 };
-    auto* int_array{ new int[length] {} };
+    int* int_array{ new int[length] {} };
 
     int value{ 5 };
     for (int i { 0 }; i < length ; ++i)
