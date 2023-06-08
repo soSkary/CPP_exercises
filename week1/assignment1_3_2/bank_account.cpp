@@ -46,15 +46,3 @@ void Bank_account::display_balance()
     std::cout << "\n\nThe balance of your account is:\n" << m_money << " €\n\n";
     return;
 }
-// //The account information is written to file
-// Bank_account::create_log()
-// {
-    
-//     //create an outputstream variable with the defined path
-//     std::ofstream account_file(path, std::iostream::app);
-//     //write to file
-//     account_file << "account_ID," << get_id() << ",balance," << get_balance() << "€\n";
-//     static int counter{1};
-//     account_file << "This is write number " << counter++ << '\n';
-//     account_file.close();
-// }

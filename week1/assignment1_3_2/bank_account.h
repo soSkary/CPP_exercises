@@ -23,8 +23,6 @@ public:
     void deposit_money(const double money);
     int withdraw_money();
     void display_balance();
-    
-    //void create_log();
         
 };
 
