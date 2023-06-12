@@ -40,6 +40,7 @@ enum Students
     max_students
 };
 
+//Function for printing out names of student enum
 void print_student(Students student)
 {
     switch (student)
@@ -77,21 +78,25 @@ void print_student(Students student)
     }
 }
 
+//Function for shuffling vector of students
 void shuffle_students(std::vector<Students>& students)
 {
     std::shuffle(students.begin(), students.end(), mt);
 }
 
+//Function for printing the student review pairs
 void print_student_reviews(const std::vector<Students>& students)
 {
-    for (std::size_t i {0}; i < students.size()-1; ++i)
+    //Loop the list, except for last student
+    for (std::size_t i {0}; i < students.size() - 1; ++i)
     {
         print_student(students.at(i));
         std::cout << "\twill review\t";
         print_student(students.at(i + 1));
         std::cout << ".\n";
     }
-    print_student(students.at(students.size()-1));
+    //Assign last student to review first student
+    print_student(students.at(students.size() - 1));
     std::cout << "\twill review\t";
     print_student(students.at(0));
     std::cout << ".\n";
