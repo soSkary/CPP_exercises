@@ -1,3 +1,12 @@
+/*
+
+Exercise 1:
+
+Create an array with 10 random numbers in it. Your program should also be able to output the elements in the array.
+
+*/
+
+
 #include "random.h"
 
 #include <algorithm>
