@@ -1,33 +1,15 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include <iostream>
-#include <limits>
+#include <string>
 
 namespace Utility
 {
     
-    int get_user_int()
-    {
-        int value;
-        while (true)
-        {
-            std::cout << "Please input integer value: ";
-            std::cin >> value;
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-            if (!std::cin)
-            {
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            }
-            else
-            {
-                return value;
-            }
-        }
-    }
-
+    int get_user_int();    
+    double get_user_double();
+    std::string get_user_string();
+    char get_user_char();
 }
 
 #endif //UTILS_H

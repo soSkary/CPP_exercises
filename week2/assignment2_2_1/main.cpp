@@ -1,10 +1,12 @@
-#include "utilities/food.h"
-#include "utilities/utils.h"
+#include "food.h"
+#include "utils.h"
 
 #include <iostream>
 
 namespace Menu
 {
+    void add_food(std::vector<Food>& menu);
+    
     void menu(std::vector<Food>& menu)
     {
         while (true)
@@ -16,22 +18,33 @@ namespace Menu
                 std::cout << counter << ") " << food << ", " << food.m_price << " €\n";
                 ++counter;
             }
-            std::cout << counter << ") " << "Add food to menu\n";
-            int user_input(Utility::get_user_int());
-            if (user_input < 0 || user_input > menu.size())
+            std::cout << '\n';
+            std::cout << "a) " << "Add food to menu\n";
+            std::cout << "q) " << "Quit the menu\n";
+            
+            char choice(Utility::get_user_char());
+            if (choice == 'a')
             {
-                std::cout << "Invalid input, please try again!\n\n";
+                add_food(menu);
             }
-            else if (user_input == menu.size())
+            else if (choice == 'q')
             {
-                std::cout << "Do something!\n";
-            }
-            else
-            {
-                
+                return;
             }
 
         }
+    }
+
+    void add_food(std::vector<Food>& menu)
+    {
+        std::cout << "Please enter name of food: ";
+        std::string name{Utility::get_user_string()};
+        
+        std::cout << "Please enter price of food: ";
+        double price{ Utility::get_user_double() };
+        
+        menu.push_back(Food{ name, price });
+        menu.back().add_ingredients();
     }
 }
 
@@ -40,10 +53,10 @@ int main()
 {
     std::vector<Food> menu
     {
-    { "Mac n' Cheese", 12.50, { "Macaroni", "Cheese", "Cream", "Butter" } },
-    { "Cheeseburger", 10.00, { "Minced beef", "Wheat bun", "Cheese", "Onions" } },
-    { "Steak and fries", 15.00, {"Beef steak", "Potato", "Pepper"}}
-    };
+        { "Mac n' Cheese", 12.50, { "Macaroni", "Cheese", "Cream", "Butter" } },
+        { "Cheeseburger", 10.00, { "Minced beef", "Wheat bun", "Cheese", "Onions" } },
+        { "Steak and fries", 15.00, {"Beef steak", "Potato", "Pepper"} }
+        };
 
     Menu::menu(menu);
 

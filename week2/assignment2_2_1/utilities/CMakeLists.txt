@@ -1,2 +1,3 @@
-add_library(utilities food.cpp food.h utils.h)
-target_link_libraries(fuudoora PUBLIC utilities)
+#Creates a library, but also defines it as a target to be used in CMakeLists.txt
+add_library(utilities food.cpp food.h utils.cpp utils.h)
+

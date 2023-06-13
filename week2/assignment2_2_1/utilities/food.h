@@ -12,7 +12,10 @@ struct Food
     double m_price{};
     std::vector<std::string> m_ingredients{};
 
+    Food(const std::string& name, const double price);
+    Food(const std::string& name, const double price, const std::vector<std::string>& ingredients);
     void print_ingredients();
+    void add_ingredients();
 
     friend std::ostream& operator<<(std::ostream& ostream, const Food& food);
 };
