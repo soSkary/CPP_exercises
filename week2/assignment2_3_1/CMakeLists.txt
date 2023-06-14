@@ -8,8 +8,8 @@ add_subdirectory(exercise3)
 add_subdirectory(exercise4)
 add_subdirectory(exercise5)
 add_subdirectory(exercise6)
-#add_subdirectory(exercise7)
+add_subdirectory(exercise7)
 
 add_executable(${PROJECT_NAME} main.cpp exercises.h)
 
-target_link_libraries(${PROJECT_NAME} exercise1 exercise2 exercise3 exercise4 exercise5 exercise6)
+target_link_libraries(${PROJECT_NAME} exercise1 exercise2 exercise3 exercise4 exercise5 exercise6 exercise7)

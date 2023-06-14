@@ -176,6 +176,59 @@ int main()
     print_arr(vect4);
 
     std::cout << "\n\n";
+
+    //exercise7
+    std::cout << "EXERCISE 7:\n";
+    std::cout << "Create a vector of pairs, including repeating first elements. Check if order preserved.\n";
+    std::cout << "\n\nInitial state:\n";
+
+    std::vector<std::pair<std::string, int>> pair_arr1
+    {
+        { "Aatami", 25 },
+        { "Aatami", 28 },
+        { "Aatami", 19 },
+        { "Aatami", 56 },
+        { "Eeva",   25 },
+        { "Eeva",   28 },
+        { "Eeva",   19 },
+        { "Eeva",   56 },
+        { "Jaakko", 25 },
+        { "Jaakko", 28 },
+        { "Jaakko", 19 },
+        { "Jaakko", 56 },
+        { "Maija",  25 },
+        { "Maija",  28 },
+        { "Maija",  19 },
+        { "Maija",  56 },
+        { "Neea",   25 },
+        { "Neea",   28 },
+        { "Neea",   19 },
+        { "Neea",   56 },
+        { "Rauni",  25 },
+        { "Rauni",  28 },
+        { "Rauni",  19 },
+        { "Rauni",  56 },
+        { "Rauno",  25 },
+        { "Rauno",  28 },
+        { "Rauno",  19 },
+        { "Rauno",  56 },
+        { "Tuomas", 25 },
+        { "Tuomas", 28 },
+        { "Tuomas", 19 },
+        { "Tuomas", 56 }
+    };
+    print_arr(pair_arr1);
+    std::vector<std::pair<std::string, int>> pair_arr1_copy{pair_arr1};
+
+    std::cout << "\n\nSorted according to string with std::sort:\n";
+    sort_arr(pair_arr1);
+    print_arr(pair_arr1);
     
+    std::cout << "\n\nSorted according to string with std::stable_sort:\n";
+    sort_arr_maintain_relative_order(pair_arr1_copy);
+    print_arr(pair_arr1_copy);
+
+    std::cout << '\n';
+
     return 0;
 }
