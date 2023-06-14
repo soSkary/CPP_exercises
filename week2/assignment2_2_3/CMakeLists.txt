@@ -10,6 +10,4 @@ add_subdirectory(libs)
 
 target_include_directories(game PUBLIC includes libs)
 
-target_link_directories(game PUBLIC libs)
-
 target_link_libraries(game board)
