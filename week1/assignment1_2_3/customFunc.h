@@ -14,10 +14,6 @@ struct Student
     friend std::ostream& operator<<(std::ostream& ostream, Student& student);
 };
 
-std::string reverse_string(const std::string& str);
-
-bool password_verifier(const std::string& password);
-
 std::vector<Student> create_student_group();
 std::string get_name();
 int get_age();
