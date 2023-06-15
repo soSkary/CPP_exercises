@@ -15,15 +15,8 @@ Use CMake to build your program.
 
 namespace fs = std::filesystem;
 
-void print_file_contents()
+void print_file_contents(const char* file_path)
 {
-    
-    std::cout << "Enter file path to open. We're currently at\n"
-        << fs::current_path() << '\n';
-    
-    std::string file_path;
-    std::getline(std::cin, file_path);
-
     std::ifstream file_input(file_path);
 
     //Check if opening of file not succesful
