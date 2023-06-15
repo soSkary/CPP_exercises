@@ -1,0 +1,9 @@
+USER,USER_ID,ACCOUNT_ID,BALANCE
+Milja Miljonääri,0,0,50000€
+Milja Miljonääri,0,1,4612€
+Milja Miljonääri,0,3,556647€
+Testi Tyyppi,1,4,550€
+Testi Tyyppi,1,5,4789€
+Tomi T,2,2,50€
+USER,USER_ID,ACCOUNT_ID,BALANCE
+Milja Miljonääri,0,0,5e+07€
