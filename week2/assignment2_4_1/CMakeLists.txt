@@ -12,6 +12,6 @@ add_executable(${Executable_name} main.cpp)
 add_subdirectory(src)
 add_subdirectory(cxxopts)
 
-target_link_libraries(${Executable_name} get_user_file cxxopts)
+target_link_libraries(${Executable_name} get_user_file cxxopts dir_text_size)
 
 target_include_directories(${Executable_name} PUBLIC ${CMAKE_SOURCE_DIR}/includes ${CMAKE_SOURCE_DIR}/cxxopts/include)

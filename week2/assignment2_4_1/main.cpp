@@ -13,7 +13,8 @@ int main(int argc, char* argv[])
         //Set default_value to false, ie. if flag not present
         ("l,lines", "Enable line counter", cxxopts::value<bool>()->default_value("false"))
         ("w,words", "Enable word counter", cxxopts::value<bool>()->default_value("false"))
-
+        ("c,chars", "Enable character counter", cxxopts::value<bool>()->default_value("false"))
+        ("d,dirsize", "Return size of .txt files in directory", cxxopts::value<bool>()->default_value("false"))
         ("file_path", "Give file path to text to be parsed", cxxopts::value<std::string>());
     //Parse the flag itself, not the parameter after the flag
     options.parse_positional({ "file_path" });
@@ -25,10 +26,16 @@ int main(int argc, char* argv[])
     {
         std::cout << "Please give file path as command-line argument.\n";
     }
-    //If file path present, run function
+    //If dirsize flag present, run function to count size of .txt files in folder 
+    else if (result["dirsize"].as<bool>())
+    {
+        print_dir_text_size(result["file_path"].as<std::string>());
+    }
+    //If file path present, run function.
+    //Pass filepath and flags lines, words, and chars as booleans
     else
     {
-        print_file_contents(result["file_path"].as<std::string>(), result["lines"].as<bool>(), result["words"].as<bool>());
+        print_file_contents(result["file_path"].as<std::string>(), result["lines"].as<bool>(), result["words"].as<bool>(), result["chars"].as<bool>());
     }
 
     return 0;
