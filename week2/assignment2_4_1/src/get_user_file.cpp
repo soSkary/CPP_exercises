@@ -6,16 +6,16 @@ and prints the contents of the file to the console.
 Make sure to handle errors, like if the file doesn't exist.
 Use CMake to build your program.
 */
-#include <filesystem>
+#include <algorithm>
 #include <fstream>
 #include <iostream>
-#include <string>
+#include <sstream>
 
-#include "get_user_file.h"
+#include "file_io.h"
 
-namespace fs = std::filesystem;
 
-void print_file_contents(const char* file_path)
+
+void print_file_contents(const std::string& file_path, const bool lines,const bool words)
 {
     std::ifstream file_input(file_path);
 
@@ -30,12 +30,41 @@ void print_file_contents(const char* file_path)
 
     //Loop through the file and print it out line by line
     std::string line;
+    unsigned int line_count{ 0 };
+    unsigned int word_count{ 0 };
 
     while (std::getline(file_input, line))
     {
-        std::cout << line << '\n';
+        //Check if we wan't to count the lines, or output file
+        if (lines)
+        {
+            ++line_count;
+        }
+        if (words)
+        {
+            std::stringstream stream_dump{line};
+            std::string line_dump;
+            while (stream_dump >> line_dump)
+            {
+                ++word_count;
+            }
+        }
+        else
+        {
+            std::cout << line << '\n';
+        }
     }
-
+    if (lines)
+    {
+        std::cout << "\nThe file " << file_path << " contains "
+            << line_count << " lines.\n";
+    }
+    if (words)
+    {
+        std::cout << "\nThe file " << file_path << " contains "
+            << word_count << " words.\n";
+    }
+    
     //Close file and reaffirm it to user
     file_input.close();
     std::cout << "\nClosed file: " << file_path << '\n';
