@@ -51,8 +51,17 @@ std::vector<Sensor_reading> filter_data_per_id(const std::vector<Sensor_reading>
         });
     return return_vector;
 }
-//Function to print whole dataset
+//Function to print a dataset of sensor readings
 void print_data(const std::vector<Sensor_reading>& data)
+{
+    for (const auto& elem : data)
+    {
+        std::cout << elem << '\n';
+    }
+}
+
+//Function to print a vector of strings
+void print_data(const std::vector<std::string>& data)
 {
     for (const auto& elem : data)
     {
@@ -129,4 +138,50 @@ void check_for_outliers(std::vector<Sensor_reading>&data)
     }
     std::cout << "Outliers found: " << counter << '\n';
 }
+//A function that checks which sensor(s) are the most active, giving out most
+//sensor readings - returns a vector of strings with sensor_ids
+std::vector<std::string> most_frequent_sensor(std::vector<Sensor_reading>& data)
+{
+    //Sort the data according to sensor_id
+    std::sort(data.begin(), data.end(), [](const auto& a, const auto& b)
+        {
+            return a.m_sensor_id < b.m_sensor_id;
+        });
+    
+    int max_count{ 0 };
+    std::vector<std::string> max_values{};
+    int current_count{ 0 };
 
+    //Loop through the data once,  as we have ensured its sorted
+    for (auto it{ data.begin() }; it != data.end();++it )
+    {
+        //Value to test against
+        std::string current_value{it->m_sensor_id};
+        
+        //Fast forward and count as long as value stays the same or next is not .end()
+        while ((it + 1)->m_sensor_id == current_value && (it + 1) != data.end())
+        {
+            ++current_count;
+            ++it;
+
+        }
+        //Add the last count after while loop 
+        ++current_count;
+        
+        //If the new count is as big as max_count, add to vector
+        if (current_count == max_count)
+        {
+            max_values.push_back(current_value);
+        }
+        //If the new count is bigger than max_count, clear and add to vector
+        else if (current_count > max_count)
+        {
+            max_values.clear();
+            max_values.push_back(current_value);
+            max_count = current_count;
+        }
+        //Reset current_count when going to next value
+        current_count = 0;
+    }
+    return max_values;
+}
