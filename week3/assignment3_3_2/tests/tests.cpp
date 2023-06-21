@@ -3,6 +3,8 @@
 #include "math_utils.h"
 #include "string_utils.h"
 
+#include "bank.h"
+
 #include <stdexcept>
 
 TEST_CASE("Testing math_utils.cpp")
@@ -31,3 +33,29 @@ TEST_CASE("Testing string_utils.cpp")
     CHECK(is_palindrome("ABBA") == true);
     CHECK(is_palindrome("KaYAk") == true);
 };
+
+
+TEST_CASE("Testing banking_application")
+{
+    //Check bank-account withdraw, deposit, and display_balance functions
+    Bank_account bank_account{ 1000.0 };
+
+    CHECK(bank_account.display_balance() == 1000.0);
+    bank_account.withdraw_money(150.0);
+    CHECK(bank_account.display_balance() == 850.0);
+    bank_account.deposit_money(1000.0);
+    CHECK(bank_account.display_balance() == 1850.0);
+    CHECK(bank_account.withdraw_money(2000.0) == 0.0);
+
+    std::vector<User> users;
+    users.push_back(User{ "Matti1", "Tie1", "04001" });
+    users.push_back(User{ "Matti2", "Tie2", "04002" });
+    users.push_back(User{ "Matti3", "Tie3", "04003" });
+
+    CHECK(users.at(2).get_id() == 2);
+    CHECK(users.at(2).get_name() == "Matti3");
+    CHECK(users.at(2).get_phone() == "04003");
+    CHECK(users.at(2).get_adress() == "Tie3");
+    
+};
+
