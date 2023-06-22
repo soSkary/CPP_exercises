@@ -15,5 +15,5 @@ target_include_directories(${executable_name} PUBLIC /include)
     
 target_link_libraries(${executable_name} PUBLIC utility_functions weather weather_logs)
 
-#add_subdirectory(tests)
+add_subdirectory(tests)
 
