@@ -10,7 +10,7 @@ Food::Food(const std::string& name, const double price, const std::vector<std::s
     : m_name{ name }, m_price{ price }, m_ingredients{ ingredients }
 {}
 
-void Food::print_ingredients()
+void Food::print_ingredients() const
 {
     if (m_ingredients.size() == 0)
     {
@@ -59,19 +59,19 @@ std::ostream& operator<<(std::ostream& ostream, const Food& food)
     ostream << food.m_name;
     return ostream;
 }
-
+//A struct to keep track of Foods on order and total price
 struct Order
 {
     std::vector<Food> m_order;
     double m_order_total_price{0.00};
 };
 
-
+//Restaurant interface for adding foods and ingredients to customer menu
 void Menu::management_menu(std::vector<Food>& menu)
 {
     while (true)
     {
-        std::cout << "\n\nMenu:\n";
+        std::cout << "\n\nManagement menu:\n";
         int counter{ 0 };
         for (const auto& food : menu)
         {
@@ -79,17 +79,23 @@ void Menu::management_menu(std::vector<Food>& menu)
             ++counter;
         }
         std::cout << '\n';
-        std::cout << "a) " << "Add food to menu\n";
-        std::cout << "q) " << "Quit the menu\n";
-        
-        char choice(Utility::get_user_char());
-        if (choice == 'a')
+        std::cout << "a) Add food to menu\n";
+        std::cout << "p) Print menu and ingredients\n";
+        std::cout << "q) Quit the menu\n";
+
+        char choice(Utility::to_lowercase(Utility::get_user_char()));
+        switch (choice)
         {
+        case 'a':
             add_food_to_menu(menu);
-        }
-        else if (choice == 'q')
-        {
+            break;
+        case 'p':
+            print_menu_and_ingredients(menu);
+            break;
+        case 'q':
             return;
+        default:
+            break;
         }
 
     }
@@ -107,6 +113,19 @@ void Menu::add_food_to_menu(std::vector<Food>& menu)
     menu.back().add_ingredients();
 }
 
+void Menu::print_menu_and_ingredients(const std::vector<Food>& menu)
+{
+    std::cout << "\n\nMenu:\n";
+    for (const auto& food : menu)
+    {
+        std::cout << food << '\n';
+        food.print_ingredients();
+        std::cout << '\n';
+    }
+}
+
+//For converting an Order to a vector to be passed to main
+///save food and price in strings
 std::vector<std::string> Menu::print_order_to_string(const Order& order)
 {
     std::vector<std::string> return_vector(order.m_order.size()+1);
@@ -124,12 +143,13 @@ std::vector<std::string> Menu::print_order_to_string(const Order& order)
     return return_vector;
 }
 
+//The user interface for placing and editing an order
 std::vector<std::string> Menu::user_menu(const std::vector<Food>& menu)
 {
     Order order;
     while (true)
     {
-        std::cout << "\n\nMenu:\n";
+        std::cout << "\n\nUser menu:\n";
         int counter{ 0 };
         for (const auto& food : menu)
         {
@@ -138,6 +158,7 @@ std::vector<std::string> Menu::user_menu(const std::vector<Food>& menu)
         }
         std::cout << "\nCurrent order price: " << order.m_order_total_price << "€\n";
         std::cout << "a) Add food to order\n";
+        std::cout << "p) Print current order status\n";
         std::cout << "r) Remove food from order\n";
         std::cout << "q) Place the order and quit the menu\n";
         
@@ -146,6 +167,9 @@ std::vector<std::string> Menu::user_menu(const std::vector<Food>& menu)
         {
             case 'a':
                 add_food_to_order(menu, order);
+                break;
+            case 'p':
+                print_current_order_status(order);
                 break;
             case 'r':
                 remove_food_from_order(order);
@@ -157,6 +181,7 @@ std::vector<std::string> Menu::user_menu(const std::vector<Food>& menu)
         }
     }
 }
+//A loop to add foods to the current order
 void Menu::add_food_to_order(const std::vector<Food>& menu, Order& order)
 {
     while (true)
@@ -209,6 +234,17 @@ void Menu::add_food_to_order(const std::vector<Food>& menu, Order& order)
             return;
         }
     }
+}
+
+void Menu::print_current_order_status(const Order& order)
+{
+    std::cout << "Current order:\n";
+    for (const auto& item : order.m_order)
+    {
+        std::cout << item.m_name << " - " << item.m_price << '\n';
+    }
+
+    std::cout << "Total price: " << order.m_order_total_price << '\n';
 }
 
 void Menu::remove_food_from_order(Order& order)

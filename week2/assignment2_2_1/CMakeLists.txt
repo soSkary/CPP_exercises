@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.24)
 
-project(fuudoora    VERSION 0.01
+project(fuudoora    VERSION 099
                     DESCRIPTION "A food service program"
                     LANGUAGES CXX)
 
