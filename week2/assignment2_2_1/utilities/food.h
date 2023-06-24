@@ -20,6 +20,17 @@ struct Food
     friend std::ostream& operator<<(std::ostream& ostream, const Food& food);
 };
 
+struct Order;
 
+namespace Menu
+{
+    void management_menu(std::vector<Food>& menu);
+    void add_food_to_menu(std::vector<Food>& menu);
+
+    std::vector<std::string> user_menu(const std::vector<Food>& menu);
+    void add_food_to_order(const std::vector<Food>& menu, Order& order);
+    void remove_food_from_order(Order& order);
+    std::vector<std::string> print_order_to_string(const Order& order);
+}
 
 #endif //FOOD_H

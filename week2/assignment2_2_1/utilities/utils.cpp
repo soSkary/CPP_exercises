@@ -8,7 +8,6 @@ int Utility::get_user_int()
         int value;
         while (true)
         {
-            std::cout << "Please input integer value: ";
             std::cin >> value;
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
@@ -29,7 +28,6 @@ int Utility::get_user_int()
         double value;
         while (true)
         {
-            std::cout << "Please input floating point number: ";
             std::cin >> value;
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
@@ -50,7 +48,6 @@ int Utility::get_user_int()
         std::string value;
         while (true)
         {
-            std::cout << "Please input string: ";
             std::getline(std::cin >> std::ws, value);
         
             if (!std::cin)
@@ -70,7 +67,6 @@ int Utility::get_user_int()
         char value;
         while (true)
         {
-            std::cout << "Please input character: ";
             std::cin >> value;
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
@@ -85,4 +81,7 @@ int Utility::get_user_int()
             }
         }
     }
-
+    char Utility::to_lowercase(char c)
+    {
+        return static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+    }

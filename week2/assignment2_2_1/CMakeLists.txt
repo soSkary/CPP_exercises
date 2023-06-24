@@ -15,9 +15,7 @@ add_subdirectory(utilities)
 
 #Here I tell that the target ${PROJECT_NAME} will find #includes in path utilities
 target_include_directories(${PROJECT_NAME} PUBLIC utilities)
-#Here I tell that the target ${PROJECT_NAME} will find libraries to link in path utilities
-target_link_directories(${PROJECT_NAME} PUBLIC utilities)
 #Here I tell which libaries to link with target ${PROJECT_NAME}
-target_link_libraries(${PROJECT_NAME} PUBLIC utilities)
+target_link_libraries(${PROJECT_NAME} PUBLIC food_utilities)
 
 
