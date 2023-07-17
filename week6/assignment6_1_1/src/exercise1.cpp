@@ -1,7 +1,7 @@
 #include "exercise1.hpp"
 
-status random_status_code(status max_status)
+status random_status_code()
 {
-    int randomly_distributed{ std::uniform_int_distribution{0, static_cast<int>(max_status) - 1}(Random::mt) };
-    return static_cast<status>(randomly_distributed);
+    int randomly_distributed{ std::uniform_int_distribution{0, static_cast<int>(status_count) - 1}(Random::mt) };
+    return all_statuses.at(randomly_distributed);
 }

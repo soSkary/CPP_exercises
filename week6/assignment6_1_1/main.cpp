@@ -6,7 +6,7 @@
 int main()
 {
 
-    status current_status(random_status_code(status::max_status));
+    status current_status(random_status_code());
 
     switch (current_status)
     {

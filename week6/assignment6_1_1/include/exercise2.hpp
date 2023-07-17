@@ -11,6 +11,7 @@ enum class order_status
 
 };
 
+
 struct State_machine
 {
     order_status current_status;
