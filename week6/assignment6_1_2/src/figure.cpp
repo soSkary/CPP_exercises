@@ -3,6 +3,10 @@
 #include <cassert>
 #include <iostream>
 
+Tag Figure::get_type() const
+{
+    return current_tag;
+}
 
 int Figure::robot_identifier() const
 {

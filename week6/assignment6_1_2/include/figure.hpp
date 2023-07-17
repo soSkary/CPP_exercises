@@ -12,7 +12,8 @@ struct Figure
 {
 
 public:
-
+    Tag get_type() const;
+    
     //Getters for union
     int robot_identifier() const;
     char person_identifier() const;
