@@ -1,5 +1,5 @@
-#ifndef FIGURE_H
-#define FIGURE_H
+#ifndef OBJECT_HPP
+#define OBJECT_HPP
 
 #include <string>
 

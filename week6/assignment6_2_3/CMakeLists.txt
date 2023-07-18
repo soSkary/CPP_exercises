@@ -15,7 +15,7 @@ add_subdirectory(src)
     
 target_include_directories(${executable_name} PUBLIC ${CMAKE_SOURCE_DIR}/include)
     
-target_link_libraries(${executable_name} PUBLIC figure)
+target_link_libraries(${executable_name} PUBLIC object)
 
 #add_subdirectory(tests)
 

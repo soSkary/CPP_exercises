@@ -1,4 +1,4 @@
-#include "figure.hpp"
+#include "object.hpp"
 
 #include <cassert>
 #include <iostream>
