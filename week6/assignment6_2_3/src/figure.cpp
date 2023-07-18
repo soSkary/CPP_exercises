@@ -5,6 +5,10 @@
 
 Object::Object(const int identifier) : current_tag{Tag::integer}, robot{identifier} {}
 Object::Object(const char identifier) : current_tag{Tag::character}, person{identifier} {}
+Object::Object(const std::string& identifier) : current_tag{ Tag::character }
+{
+    person = identifier.at(0);
+}
 Object::Object(const float identifier) : current_tag{Tag::floating_point}, alien{identifier} {}
 
 Tag Object::get_type() const
@@ -41,6 +45,12 @@ void Object::set_identifier(const char first_letter)
 {
     current_tag = Tag::character;
     person = first_letter;
+}
+
+void Object::set_identifier(const std::string& name)
+{
+    current_tag = Tag::character;
+    person = name.at(0);
 }
 
 void Object::set_identifier(const float wavelength)

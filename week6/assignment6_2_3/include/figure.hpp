@@ -1,6 +1,8 @@
 #ifndef FIGURE_H
 #define FIGURE_H
 
+#include <string>
+
 enum class Tag {
     integer,
     character,
@@ -14,6 +16,7 @@ struct Object
 public:
     explicit Object(const int identifier);
     explicit Object(const char identifier);
+    Object(const std::string& identifier);
     explicit Object(const float identifier);
 
     Tag get_type() const;
@@ -26,6 +29,7 @@ public:
     //Setters for tag and union
     void set_identifier(const int id);
     void set_identifier(const char first_letter);
+    void set_identifier(const std::string& name);
     void set_identifier(const float wavelength);
 
     void print() const;

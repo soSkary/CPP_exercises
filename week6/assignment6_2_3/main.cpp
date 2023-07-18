@@ -26,8 +26,12 @@ int main()
     //The copy constructor is prohibited with the explicit specifier
     //object = robot;
 
+    Object string_object{ "Erkki" };
+    std::cout << "Testing getter " << string_object.person_identifier() << '\n';
+    string_object.print();
+
     //This should fail
-    std::cout << "This assertion should fail: " << object.robot_identifier() << '\n';
+   // std::cout << "This assertion should fail: " << object.robot_identifier() << '\n';
 
     return 0;
 }
