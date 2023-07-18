@@ -14,7 +14,7 @@ public:
     c_file_functionality(const std::string& user_file_name);
     ~c_file_functionality();
 
-    void read_next_line_of_file();
+    std::string read_next_line_of_file();
     uint32_t check_file_size();
 
 private:

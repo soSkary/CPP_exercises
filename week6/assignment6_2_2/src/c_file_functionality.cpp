@@ -22,7 +22,7 @@ c_file_functionality::~c_file_functionality()
     std::cout << "Closed file " << file_name << " in the destructor.\n";
 }
 
-void c_file_functionality::read_next_line_of_file()
+std::string c_file_functionality::read_next_line_of_file()
 {
     std::string text_line;
     //we want an integer to handle EOF
@@ -32,11 +32,12 @@ void c_file_functionality::read_next_line_of_file()
     {
         if (symbol == '\n')
         {
+            text_line.push_back('\n');
             break;
         }
         text_line.push_back(static_cast<char>(symbol));
     }
-    std::cout << text_line << '\n';
+    return text_line;
 }
 
 uint32_t c_file_functionality::check_file_size()
