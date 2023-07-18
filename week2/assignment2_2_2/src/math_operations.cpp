@@ -54,7 +54,7 @@ double get_operation_and_values()
     std::cout << "Please input second number to be operated on: ";
     double b{ get_user_double() };
 
-    if (operation == '/');
+    if (operation == '/')
     {
         while (b == 0.0)
         {
