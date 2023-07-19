@@ -1,14 +1,15 @@
 #include "c_file_functionality.hpp"
+#include <stdexcept>
 
 #include <iostream>
 
 c_file_functionality::c_file_functionality(const std::string& user_file_name)
 : file_name{user_file_name}
 {
-    file_handle = std::fopen(user_file_name.c_str(), "r");
+    file_handle = std::fopen(file_name.c_str(), "r");
     if (!file_handle)
     {
-        std::perror("Failed to open file!");
+        throw std::runtime_error("Couldn't open file " + file_name);
     }
     else
     {
@@ -22,7 +23,7 @@ c_file_functionality::~c_file_functionality()
     std::cout << "Closed file " << file_name << " in the destructor.\n";
 }
 
-std::string c_file_functionality::read_next_line_of_file()
+std::string c_file_functionality::read_line()
 {
     std::string text_line;
     //we want an integer to handle EOF
@@ -40,7 +41,7 @@ std::string c_file_functionality::read_next_line_of_file()
     return text_line;
 }
 
-uint32_t c_file_functionality::check_file_size()
+uint32_t c_file_functionality::file_size()
 {
     //A variable for the current position, to store, so we can set it back after checking file size
     fpos_t current_position;
