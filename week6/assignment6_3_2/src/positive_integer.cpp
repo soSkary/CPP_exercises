@@ -10,7 +10,11 @@ positive_integer::positive_integer(int initialization)
     if (initialization < 0)
         {
             throw std::runtime_error("Can't initialize positive_integer with negative value");
-        }
+    }
+    if (initialization > MAX_VALUE)
+    {
+        throw std::runtime_error("Integer used in initialization is too big");
+    }
         value = initialization;
         ++instances;
 }
@@ -28,9 +32,12 @@ positive_integer operator+(const positive_integer& pos_int1, const positive_inte
     int32_t return_value{pos_int1.value + pos_int2.value};
     if (return_value > MAX_VALUE)
     {
-        return_value = MAX_VALUE;
+        return MAX_VALUE;
     }
-    return return_value;
+    else
+    {
+        return pos_int1.value + pos_int2.value;
+    }
 }
 
 positive_integer operator+(const positive_integer& pos_int, const int integer)

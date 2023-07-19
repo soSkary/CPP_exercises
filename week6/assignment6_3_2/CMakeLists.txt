@@ -17,5 +17,5 @@ target_include_directories(${executable_name} PUBLIC ${CMAKE_SOURCE_DIR}/include
     
 target_link_libraries(${executable_name} PUBLIC c_file_functionality positive_integer object)
 
-#add_subdirectory(tests)
+add_subdirectory(tests)
 

@@ -91,9 +91,10 @@ int main()
     positive_integer pos_int1{ 20 };
     positive_integer pos_int2{ 40 };
 
+    
     pos_int1 = pos_int1 + pos_int2;
     std::cout << "pos_int1{ 20 } + pos_int2{ 40 } equals: " << pos_int1 << '\n';
-
+    
     pos_int1 = pos_int1 + 20;
     std::cout << "pos_int1{ 60 } + 20 equals: " << pos_int1 << '\n';
 
@@ -116,6 +117,15 @@ int main()
     std::cout << "The amount of instances of positive_integer: " << pos_int1.amount_of_class_instances() << '\n';
     std::cout << "This should be the same: " << pos_int2.amount_of_class_instances() << '\n';
 
+    bool pos_int_bool;
+    pos_int_bool = static_cast<bool>(pos_int1);
+    std::cout << std::boolalpha << "(pos_int1 = 40): " << pos_int_bool << '\n';
+    pos_int1 = 0;
+    pos_int_bool = static_cast<bool>(pos_int1);
+    std::cout << "(pos_int1 = 0): " << pos_int_bool << '\n';
+    pos_int_bool = pos_int1 < pos_int2;
+    std::cout << "pos_int1 < pos_int2: " << pos_int_bool << '\n';
+    
     return 0;
 
 }
