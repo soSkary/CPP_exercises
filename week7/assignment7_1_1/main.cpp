@@ -6,13 +6,13 @@ namespace assignment
     //template functions to check if types are the same
     //if two different types, the first one is called, else, the second is called
     template <typename T, typename U>
-    constexpr bool check_if_same_type(const T&, const U&)
+    constexpr bool check_if_same_type(T&&, U&&)
     {
         return false;
     }
 
     template <typename T>
-    constexpr bool check_if_same_type(const T&, const T&)
+    constexpr bool check_if_same_type(T&&, T&&)
     {
         return true;
     }
@@ -20,8 +20,9 @@ namespace assignment
     template <typename T>
     constexpr bool can_be_decayed_further()
     {
-        return !(std::is_same_v<std::decay_t<T>, T>);
+        return !(std::is_same_v<T, std::decay_t<T>>);
     }
+
 }
 
 
@@ -42,13 +43,9 @@ int main()
     std::cout << "b and c are of the same type: " << assignment::check_if_same_type(b, c) << '\n';
     std::cout << "a and c are of the same type: " << assignment::check_if_same_type(a, c) << '\n';
 
-    int& d{ c };
-    const int e{ c };
-    auto f{ c };
-
-    std::cout << "int& d{ c } can be decayed further: " << assignment::can_be_decayed_further<int&>() << '\n';
-    std::cout << "const int e{ c } can be decayed further: " << assignment::can_be_decayed_further<const int>() << '\n';
-    std::cout << "auto f{ c } can be decayed further: " << assignment::can_be_decayed_further<int>() << '\n';
+    std::cout << "int& can be decayed further: " << assignment::can_be_decayed_further<int&>() << '\n';
+    std::cout << "const int can be decayed further: " << assignment::can_be_decayed_further<const int>() << '\n';
+    std::cout << "int can be decayed further: " << assignment::can_be_decayed_further<int>() << '\n';
 
     return 0;
 }
