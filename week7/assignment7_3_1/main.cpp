@@ -44,10 +44,7 @@ int main()
     
     car1.get_type();
     o_a.get_type();
-
-
-   // std::cout << "\nTrying MIXINS\n\n";
-    
+   
 
     return 0;
 }
