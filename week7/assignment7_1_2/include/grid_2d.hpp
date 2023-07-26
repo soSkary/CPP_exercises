@@ -14,20 +14,25 @@ namespace grid_2d {
     {
     public:
         using storage_type = std::vector<T>;
-        using value_type = storage_type::value_type;
-        using reference = storage_type::reference;
-        using const_reference = storage_type::const_reference;
+        using value_type = T;
+        using reference = T&;
+        using const_reference = const T&;
         using iterator = storage_type::iterator;
         using const_iterator = storage_type::const_iterator;
         using difference_type = storage_type::difference_type;
         using size_type = storage_type::size_type;
 
         grid_2d() = default;
-        
+
         grid_2d(size_type row_count, size_type col_count)
             : rows{ row_count }, columns{ col_count }, data_container(row_count* col_count) {}
-        
 
+        grid_2d(size_type row_count, size_type col_count, storage_type values) : rows{ row_count }, columns{ col_count }
+        {
+            if ((row_count * col_count) != values.size())
+                throw std::runtime_error("row_count * col_count doesn't match with initalizing vector.size()");
+            data_container = values;
+        }
 
         iterator begin();
         iterator end();
@@ -44,18 +49,20 @@ namespace grid_2d {
         std::pair<size_type, size_type> size_2d() const { return { rows, columns }; }
 
         size_type max_size() const { return data_container.max_size(); }
-        
+
         void resize(size_type new_width, size_type new_height);
 
         T& at(std::size_t x, std::size_t y);
 
+        T* data();
+
         void fill_data();
-        
+
         friend std::ostream& operator<<<T>(std::ostream& out, const grid_2d<T>& grid);
 
     private:
-        size_type rows;
-        size_type columns;
+        size_type rows{ 0 };
+        size_type columns{ 0 };
 
         storage_type data_container;
 
@@ -64,7 +71,10 @@ namespace grid_2d {
     template <typename T>
     T& grid_2d<T>::at(std::size_t x, std::size_t y)
     {
-        return data_container.at(x * rows + y);
+        if (x >= rows || y >= columns)
+            throw std::runtime_error("Coordinates at.(x,y) out of bounds");
+
+        return data_container.at(x * columns + y);
     }
 
     template <typename T>
@@ -77,7 +87,7 @@ namespace grid_2d {
     {
         return data_container.end();
     }
-    
+
     template <typename T>
     grid_2d<T>::const_iterator grid_2d<T>::cbegin() const
     {
@@ -89,6 +99,12 @@ namespace grid_2d {
     {
         return data_container.cend();
     }
+
+    /*
+    Had to comment out 0 initialization in resize, so the grid could be used with non-arithmetic types
+    (i.e. new_data.at(0) = 0)
+    Will have to think about a better way to do this
+    */
 
     template <typename T>
     void grid_2d<T>::resize(grid_2d::size_type new_rows, grid_2d::size_type new_columns)
@@ -121,7 +137,7 @@ namespace grid_2d {
                     //if there's more rows than in the old one, fill with 0
                     if (current_row >= rows)
                     {
-                        new_data.at(index) = 0;
+                        new_data.at(index) = T{};
                         continue;
                     }
                     //copy over values from old to new
@@ -134,7 +150,7 @@ namespace grid_2d {
                         for (grid_2d::size_type i{ 0 }; i < column_size_difference; ++i)
                         {
                             ++index;
-                            new_data.at(index) = 0;
+                            new_data.at(index) = T{};
                         }
                         //reset counters for keeping row logic intact
                         counter = 0;
@@ -149,10 +165,10 @@ namespace grid_2d {
                 {
                     if (current_row >= rows)
                     {
-                        new_data.at(index) = 0;
+                        new_data.at(index) = T{};
                         continue;
                     }
-                    
+
                     new_data.at(index) = data_container.at(current_row * columns + counter);
                     ++counter;
                     if (counter % new_columns == 0)
@@ -167,7 +183,7 @@ namespace grid_2d {
             {
                 for (grid_2d::size_type index{ 0 }; index < new_data.size(); ++index)
                 {
-                    
+
                     new_data.at(index) = data_container.at(current_row * columns + counter);
                     ++counter;
                     if (counter % columns == 0)
@@ -175,7 +191,7 @@ namespace grid_2d {
                         for (grid_2d::size_type i{ 0 }; i < column_size_difference; ++i)
                         {
                             ++index;
-                            new_data.at(index) = 0;
+                            new_data.at(index) = T{};
                         }
                         counter = 0;
                         ++current_row;
@@ -187,7 +203,7 @@ namespace grid_2d {
             {
                 for (grid_2d::size_type index{ 0 }; index < new_data.size(); ++index)
                 {
-                    
+
                     new_data.at(index) = data_container.at(current_row * columns + counter);
                     ++counter;
                     if (counter % new_columns == 0)
@@ -205,14 +221,30 @@ namespace grid_2d {
         }
 
     }
+    
     template <typename T>
     void grid_2d<T>::fill_data()
     {
-        T value{ 0 };
-        for (auto& element : data_container)
+        if constexpr (std::is_arithmetic_v<std::decay_t<T>>)
         {
-            element = value++;
+            T value{ 0 };
+            for (auto& element : data_container)
+            {
+                element = value++;
+            }
         }
+        else
+            std::cout << "Can't fill as type not arithmetic\n";
+    }
+
+    template <typename T>
+    T* grid_2d<T>::data()
+    {
+        if (size() == 0)
+        {
+            return nullptr;
+        }
+        return data_container.data();
     }
 }
 
