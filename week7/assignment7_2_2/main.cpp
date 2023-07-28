@@ -19,9 +19,9 @@ int main()
         std::cerr << e.what() << '\n';
     }
     //Exercise 2
-    exercise<int, int, int> test{ 1,2,3 };
+    exercise test{ 1,2,3 };
 
-    std::cout << "number of arguments: " << test.get_number_of_args() << '\n';
+    std::cout << "number of arguments: " << test.number_of_args << '\n';
 
     auto test_array{ test.return_array() };
 
