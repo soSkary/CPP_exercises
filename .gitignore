@@ -31,6 +31,11 @@
 *.out
 *.app
 
+
+# All .vscode folders
+**/.vscode/*
+
+
 # Project specific executables
 1.1_1.2_plusMinus/plusMinus
 1.3_sizeOfTypes/sizeOfTypes
@@ -45,3 +50,15 @@
 
 **/.vscode/*
 **/build/*
+
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
