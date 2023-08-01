@@ -169,6 +169,7 @@ TEST_CASE("Testing grid_2d")
             ++it2;
         }
     }
+    
     SUBCASE("Move constructor and move assignment operator")
     {
         grid_2d::grid_2d<int> test2{ std::move(test) };
@@ -182,6 +183,5 @@ TEST_CASE("Testing grid_2d")
         CHECK(test3.empty());
         test3 = std::move(test2);
         CHECK(!test3.empty());
-
     }
 }

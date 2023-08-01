@@ -78,7 +78,10 @@ namespace grid_2d {
         storage_type data_container;
 
     };
+    /*********************************************************************************/
     //Here 's move semantics applied by myself, but these are unnecessary at this point
+    //So following the rule of 0
+    /*********************************************************************************/
     // template <typename T>
     // grid_2d<T>::grid_2d(grid_2d&& other)
     //     :   data_container{ std::move(other.data_container) },
@@ -99,7 +102,7 @@ namespace grid_2d {
 
     //     return *this;
     // }
-
+    /**********************************************************************************/
     template <typename T>
     T& grid_2d<T>::at(std::size_t x, std::size_t y)
     {
