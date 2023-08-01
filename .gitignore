@@ -51,8 +51,6 @@
 **/.vscode/*
 **/build/*
 
-
-# Cmake
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles

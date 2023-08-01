@@ -1,0 +1,5 @@
+add_library(banking_application main.cpp)
+target_include_directories(banking_application PUBLIC include)
+
+add_subdirectory(src)
+target_link_libraries(banking_application PUBLIC banking_utils)
