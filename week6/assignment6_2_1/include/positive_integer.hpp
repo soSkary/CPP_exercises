@@ -1,4 +1,4 @@
-#ifndef POSITIIVE_INTEGER_HPP
+#ifndef POSITIVE_INTEGER_HPP
 #define POSITIVE_INTEGER_HPP
 
 #include <cstdint>
