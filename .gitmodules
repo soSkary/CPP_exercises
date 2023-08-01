@@ -1,3 +1,3 @@
-[submodule "week2/assignment2_2_2/externals/cxxopts"]
-	path = week2/assignment2_2_2/externals/cxxopts
-	url = git@github.com:jarro2783/cxxopts.git
+[submodule "week2/assignment2_4_1/cxxopts"]
+	path = week2/assignment2_4_1/cxxopts
+	url = https://github.com/jarro2783/cxxopts.git
