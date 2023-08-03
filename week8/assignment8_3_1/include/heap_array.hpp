@@ -148,6 +148,10 @@ namespace oskar
     template <typename T>
     heap_array<T>& heap_array<T>::operator=(heap_array&& other)
     {
+        if (!empty())
+        {
+            delete[] container_front;
+        }
         container_front = std::exchange(other.container_front, nullptr);
         container_back = std::exchange(other.container_back, nullptr);
         first_empty = std::exchange(other.first_empty, nullptr);
