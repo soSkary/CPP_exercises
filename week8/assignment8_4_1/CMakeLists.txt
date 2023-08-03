@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.24)
 
-project(assignment8_3_1 LANGUAGES CXX)
+project(assignment8_4_1 LANGUAGES CXX)
 
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_STANDARD 20)
