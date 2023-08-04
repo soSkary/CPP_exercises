@@ -22,7 +22,6 @@ struct object_data
 
 // and the storage in a vector.  This usually is a bit less obvious than a static
 // global variable, but it'll do here.
-static std::vector<object_data> object_storage;
 
 
 // And then the publicly available class we actually use to access the data
@@ -33,12 +32,15 @@ class large_object
         ~large_object();
 
         large_object(const large_object& other);
-        
+        large_object& operator=(const large_object& other);
+
             //large_object(const large_object&) = delete; // default the copy constructor, since
                                                      // the class is basically just the handle
                                                      // anyway
+inline static std::vector<object_data> object_storage;
+
 private:
-        // int is often used as a handle, so negative values an be used to denote
+    // int is often used as a handle, so negative values an be used to denote
         // errors.  std::ssize_t is another often seen choice, but we aren't going
         // to create more than INT_MAX elements in our container here.
         int handle;

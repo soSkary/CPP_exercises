@@ -6,7 +6,9 @@
 
 /**
  *Problem here with the move. As there was no move constructor defined,
- *there was a double free 
+ *there was a double free when using the default constructor. So I created a
+ *move constructor and assignment operator. Also delete the copy constructor
+ *and assignment.
 */
 
 
@@ -32,7 +34,7 @@ extern "C" {
     };
 
     // and give you functions to initialise
-    some_c_library* some_c_new() {
+    inline some_c_library* some_c_new() {
         some_c_library* ptr = (some_c_library*)malloc(sizeof(some_c_library));
         assert(ptr != nullptr);
         // init the values so we don't read uninitialised memory and get
@@ -46,11 +48,11 @@ extern "C" {
     }
 
     // and destroy (free resources)
-    void some_c_free(some_c_library* ptr) {
+    inline void some_c_free(some_c_library* ptr) {
         free(ptr);
     }
 
-    void do_stuff_after_init(some_c_library* ptr) {
+    inline void do_stuff_after_init(some_c_library* ptr) {
         printf("%p:%d%ld%p\n", ptr, ptr->random, ptr->a, ptr->in);
     }
 }
@@ -63,6 +65,10 @@ class cpp_wrapper
     public:
         cpp_wrapper();
         ~cpp_wrapper();
+
+        cpp_wrapper(const cpp_wrapper&) = delete;
+        cpp_wrapper& operator=(const cpp_wrapper&) = delete;
+
         cpp_wrapper(cpp_wrapper&& other) { *this = std::move(other); }
         cpp_wrapper& operator=(cpp_wrapper&& other);
 
@@ -72,5 +78,7 @@ class cpp_wrapper
     private:
         some_c_library* library;
 };
+
+cpp_wrapper build_wrapper();
 
 #endif

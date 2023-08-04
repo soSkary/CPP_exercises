@@ -13,11 +13,10 @@
 // Implementations
 large_object::large_object() {
     int next_handle = object_storage.size();
-    std::string text{ "object number " };
-    text += std::to_string(next_handle);
+    
     // create new default-initialised value in the container
     // and set our handle to match the index
-    object_storage.push_back({ text });
+    object_storage.push_back({std::string("object number ") + std::to_string(next_handle) });
     handle = next_handle;
 }
 
@@ -31,7 +30,12 @@ large_object::~large_object() {
 
 large_object::large_object(const large_object& other) {
     handle = object_storage.size();
-    object_storage.push_back({ "object number " + std::to_string(other.handle) });
+    object_storage.push_back({ std::string("object number ") + std::to_string(other.handle) });
+}
+
+large_object& large_object::operator=(const large_object& other) {
+    handle = object_storage.size();
+    object_storage.push_back({ std::string("object number ") + std::to_string(other.handle) });
 }
 
 // int main() {
