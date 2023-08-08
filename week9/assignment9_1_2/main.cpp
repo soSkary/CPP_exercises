@@ -61,16 +61,39 @@ public:
 
 };
 
-//Exercise 1c
+//Recursive template function to print the function argument types 
+template <typename T, std::size_t N>
+constexpr void print_argument_types()
+{
+    std::cout << "function argument number" << N << " type: "
+        << typeid (typename T::template nth<N>).name()
+        << '\n';
+
+    if constexpr (N == T::argument_count-1)
+    {
+        return;
+    }
+    else
+    {
+        print_argument_types<T, N+1>();
+    }
+}
+
+//Exercise 1c & 2
 template <typename T>
 constexpr void print_type_info(T&& function_to_check)
 {
     std::cout << "func value_type: " 
     << typeid(typename decltype(caller{ function_to_check })::return_type).name() << '\n';
     std::cout << "func argument_count: " 
-    << decltype(caller{ function_to_check })::argument_count << '\n'; 
-}
+        << decltype(caller{ function_to_check })::argument_count << '\n';
 
+    if constexpr (decltype(caller{ function_to_check })::argument_count > 0)
+    {
+        //Give the caller class as template parameter to recursive function   
+        print_argument_types<decltype(caller{ function_to_check }), 0>();
+    }
+}
 
 
 
@@ -80,12 +103,9 @@ int main()
     caller a{ int_func };
     caller b{ uomap_func };
 
-   // Exercise 1b & c    
-       
+   // Exercise 1b, 1c & 2    
     print_type_info(int_func);
     print_type_info(uomap_func);
-
-    
 
     return 0;
 }
