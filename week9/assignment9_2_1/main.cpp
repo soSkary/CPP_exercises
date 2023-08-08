@@ -144,7 +144,7 @@ void check_character_status_effects(status_effects& character)
 }
 //Exercise 5
 //Create a bitmask from a std::string, every ',' represents a 1, otherwise 0
-uint64_t create_comma_mask(std::string value)
+uint64_t create_comma_mask(const std::string& value)
 {
     if (value.size() > 64)
     {
@@ -155,15 +155,14 @@ uint64_t create_comma_mask(std::string value)
     //create a bitmask with initial value of 0
     uint64_t bitmask{ 0 };
 
-    //then in a loop find first comma, shift the position in the mask to a one, 
-    //and replace comma with a space. Rinse and repeat!
-    auto comma_pos{ value.find_first_of(',') };
+    //then in a loop if comma found, shift the position in the mask to a one
 
-    while (comma_pos != std::string::npos)
+    for (std::size_t i{ 0 }; i < 64 && i < value.size(); ++i)
     {
-        bitmask |= (1ULL << comma_pos);
-        value.replace(comma_pos, 1, " ");
-        comma_pos = value.find_first_of(',');
+        if (value.at(i) == ',')
+        {
+            bitmask |= (1ULL << i);
+        }
     }
 
     return bitmask;
