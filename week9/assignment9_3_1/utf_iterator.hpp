@@ -12,30 +12,29 @@
 
 
 //Simple way to check how many bytes the char is according to the first
-//byte in the codepoint. Not sure this simplistic way is entirely safe... :D
-constexpr std::size_t how_many_bytes(char c)
+//byte in the codepoint. Will fail if given wrong UTF format
+constexpr std::size_t how_many_bytes(u_char c)
 {
-    if (c >= 0)
+    if (c < 128)
     {
         return 1;
     }
-    else if(c >= -16)
+    else if(c < 224)
     {
-        return 4;
+        return 2;
     }
-    else if (c >= -32)
+    else if (c < 240)
     {
         return 3;
     }
     else
     {
-        return 2;
+        return 4;
     }
 }
 
 
 //This decoding part I took "some" help from the internet
-
 constexpr char32_t concat_chars_to_char32t(std::string::pointer char_ptr, std::size_t nr_of_bytes)
 {
     if (nr_of_bytes == 1)
