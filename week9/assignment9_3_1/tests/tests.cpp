@@ -66,12 +66,16 @@ TEST_CASE("Testing the utf-iterator")
         {
             ++middle;
         }
-        CHECK(*middle == test_string.at(21));
+        CHECK(static_cast<char>(*middle) == test_string.at(22));
         ++middle;
         ++middle;
-        CHECK(*middle == test_string.at(23));
+        CHECK(static_cast<char>(*middle) == test_string.at(24));
 
+        CHECK(static_cast<char>(*end) == '\0');
+
+        ++end;
         
+        CHECK(static_cast<char>(*end) == '\0');
 
     }
 
