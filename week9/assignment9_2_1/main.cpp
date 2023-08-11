@@ -248,7 +248,15 @@ int main()
     std::cout << "Should print:\n"
         << "0b11111111'01111111'00111111'00011111'00001111'00000111'00000011'00000001\n";
     print_bits(bitmask3);
+
     
+    std::string user_input;
+    std::cout << "Please input comma string to convert to bitmask:\n";
+    std::getline(std::cin, user_input);
+
+    auto bitmask_user{ create_comma_mask(user_input) };
+    print_bits(bitmask_user);
+
     std::cout << '\n';
 
     return 0;
