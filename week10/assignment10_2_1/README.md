@@ -1,3 +1,5 @@
+done together with @kmoilane and @An-man
+
 Lets say we have a system of 5 planets of same mass (for some reason there's no star).  
 We need to find out their period, so the time it takes for all of them to be back at their starting positions.  
 We concider a 3D system.
