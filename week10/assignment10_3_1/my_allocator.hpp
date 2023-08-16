@@ -23,11 +23,25 @@ namespace oskar
 
         allocator() = default;
 
-        [[nodiscard]] pointer allocate(size_type n)
+        [[nodiscard]] pointer allocate(size_type)
         {
-            pointer ptr{new(memory_pool) T}  
+            if (Amount > 0)
+            {
+                return pointer ptr = new(memory_pool) T;
+            }
+            else
+            {
+                return nullptr;
+            }
         }
-        void deallocate(pointer p, size_type n) noexcept;
+        
+        void deallocate(pointer p, size_type) noexcept
+        {
+            if (Amount > 0)
+            {
+                delete[] p;
+            }
+        }
 
         template <typename U>
         constexpr allocator(const allocator<U>&) noexcept {}
@@ -37,23 +51,27 @@ namespace oskar
         // allocator(allocator&& other);
         // reference operator=(allocator&& other);
 
+    template <typename U>
+    bool operator==(const allocator<T, Amount>&, const allocator<U>&)
+    {
+        return true;
+    }
+
+   
+    template <typename U>
+    bool operator!=(const allocator<T, Amount>&, const allocator<U>&)
+    {
+        return false;
+    }
+
         
 
     private:
         static uint8_t memory_pool[Amount*sizeof(T)];
         
     };
-    template <typename T, typename U>
-    bool operator==(const allocator<T>&, const allocator<U>&)
-    {
-        return true;
-    }
-
-    template <typename T, typename U>
-    bool operator!=(const allocator<T>&, const allocator<U>&)
-    {
-        return false;
-    }
+ 
+    
 };
 
 
