@@ -27,7 +27,7 @@ namespace oskar
         {
             if (Amount > 0)
             {
-                return pointer ptr = new(memory_pool) T;
+                return new(memory_pool) T{};
             }
             else
             {
@@ -39,38 +39,33 @@ namespace oskar
         {
             if (Amount > 0)
             {
-                delete[] p;
+                p->~T;
             }
         }
 
         template <typename U>
-        constexpr allocator(const allocator<U>&) noexcept {}
+        constexpr allocator(const allocator<U, Amount>&) noexcept {}
         
-        // reference operator=(const allocator& other);
 
-        // allocator(allocator&& other);
-        // reference operator=(allocator&& other);
-
-    template <typename U>
-    bool operator==(const allocator<T, Amount>&, const allocator<U>&)
+    private:
+        static inline uint8_t memory_pool[Amount*sizeof(T)];
+        
+    };
+ 
+   
+    template <typename T, std::size_t TAmount, typename U, std::size_t UAmount>
+    bool operator==(const allocator<T, TAmount>&, const allocator<U, UAmount>&)
     {
         return true;
     }
 
    
-    template <typename U>
-    bool operator!=(const allocator<T, Amount>&, const allocator<U>&)
+    
+    template <typename T, std::size_t TAmount, typename U, std::size_t UAmount>
+    bool operator!=(const allocator<T, TAmount>&, const allocator<U, UAmount>&)
     {
         return false;
     }
-
-        
-
-    private:
-        static uint8_t memory_pool[Amount*sizeof(T)];
-        
-    };
- 
     
 };
 
