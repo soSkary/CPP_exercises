@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(executable_name main)
 
-project(assignment6_2_2)
+project(assignment6_3_2)
 
 add_compile_options(-Wall -Wextra -Wpedantic)
 
@@ -15,7 +15,7 @@ add_subdirectory(src)
     
 target_include_directories(${executable_name} PUBLIC ${CMAKE_SOURCE_DIR}/include)
     
-target_link_libraries(${executable_name} PUBLIC c_file_functionality)
+target_link_libraries(${executable_name} PUBLIC c_file_functionality positive_integer object)
 
-#add_subdirectory(tests)
+add_subdirectory(tests)
 
