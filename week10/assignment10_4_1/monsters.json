@@ -1,0 +1,23 @@
+[
+    {
+        "type": "skeleton",
+        "name": "Skeletorr",
+        "hp": 250,
+        "damage": 15,
+        "drops": ["gold", "bonedust"]
+    },
+    {
+        "type": "orc",
+        "name": "Greal",
+        "hp": 400,
+        "damage": 25,
+        "drops": ["diamonds", "random_weapon"]
+    },
+    {
+        "type": "dragon",
+        "name": "Draugr",
+        "hp": 5000,
+        "damage": 250,
+        "drops": ["diamonds", "elixir_of_immortality"]
+    }
+]
