@@ -11,7 +11,6 @@ std::string get_name()
     {
         std::cout << "Please insert name: ";
         std::getline(std::cin >> std::ws, name);
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
         if (!std::cin)
         {
